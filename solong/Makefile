@@ -1,23 +1,29 @@
 CC = gcc
 CFLAGS=-Wall -Wextra -Werror
+XMLFLAGS=-lmlx -framework OpenGL -framework Appkit
 NAME=a.out
-SOURCE_FILE=ft_memcpy.c ft_strcpy.c ft_split.c ft_strlen.c\
-			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+SOURCE_FILE=main.c init_game.c draw_map.c change_map.c valid_table.c
 INCLUDE=libft.h
 OBJS=${SOURCE_FILE:.c=.o}
 
 .c.o:
-	${CC} ${CFLAGS} -I $(INCLUDE) -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:${OBJS}
-	ar rc $@ ${OBJS}
+	make -C mlx
+	make -C libft
+	${CC} ${CFLAGS} -c gnl/*.c -D BUFFER_SIZE=10
+	${CC} ${XMLFLAGS} -L. libft/libft.a get_*.o ${OBJS}
 
 all:${NAME}
 
 clean:
-	rm -f ${OBJS}
+	rm -f *.o
+	rm -f mlx/*.o
+	rm -f libft/*.o
 
-fclean:
-	rm -f ${OBJS} ${NAME}
+fclean:clean
+	rm -f libft/libft.a
+	rm -f ${NAME}
 
 re:fclean all

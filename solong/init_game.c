@@ -19,8 +19,7 @@ void	figure_rowcol(t_game *game, char *filename)
 	char	*line;
 
 	line = NULL;
-	if (fd > 0)
-		fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	ret_value = 1;
 	while (ret_value == 1)
 	{
@@ -55,15 +54,14 @@ int	init_table(t_game *game, char *filename)
 
 	i = 1;
 	line = NULL;
-	if (fd > 0)
-		fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	ret_value = get_next_line(fd, &line);
-	length = ft_strlen(line);
+	length = (int)ft_strlen(line);
 	ft_strcpy(game->map[0], line);
 	while (ret_value == 1)
 	{
 		ret_value = get_next_line(fd, &line);
-		if (length != ft_strlen(line))
+		if (length != (int)ft_strlen(line))
 			return (0);
 		ft_strcpy(game->map[i++], line);
 	}
@@ -75,7 +73,7 @@ int	init_table(t_game *game, char *filename)
 int	init_game(t_game *game, char *filename)
 {
 	game->player.count = 0;
-	//game->player.stat = 0;
+	game->player.stat = 0;
 	game->row = 0;
 	game->exit.stat = 0;
 	game->colcnt = 0;
