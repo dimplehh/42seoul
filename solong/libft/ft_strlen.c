@@ -6,7 +6,7 @@
 /*   By: hyunhlee <hyunhlee@42seoul.student.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 13:19:38 by hyunhlee          #+#    #+#             */
-/*   Updated: 2021/05/13 15:02:27 by hyunhlee         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:10:44 by hyunhlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i;
-	size_t count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;

@@ -31,5 +31,4 @@ void	ft_putnbr_fd(int n, int fd)
 			ft_putnbr_fd(n / 10, fd);
 		ft_putchar_fd('0' + (n % 10), fd);
 	}
-	write(fd, "\n", 1);
 }
