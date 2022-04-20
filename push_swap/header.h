@@ -28,5 +28,6 @@ struct Node *tail;
 void insert(int data);
 void removeFront();
 void show();
+int	ft_atoi(const char *str);
 
 #endif

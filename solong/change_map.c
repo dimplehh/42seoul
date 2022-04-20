@@ -12,9 +12,24 @@
 
 #include "solong.h"
 
+int	player_exit(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->exit.count)
+	{
+		if (game->player.x == game->exit.x[i] \
+		&& game->player.y == game->exit.y[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	player_move(t_game *game, int keycode)
 {
-	if (!(game->player.x == game->exit.x && game->player.y == game->exit.y))
+	if (!player_exit(game))
 		game->map[game->player.y][game->player.x] = '0';
 	if (keycode == W && game->map[game->player.y - 1][game->player.x] != '1')
 		game->player.y--;
@@ -24,14 +39,13 @@ void	player_move(t_game *game, int keycode)
 		game->player.x--;
 	if (keycode == D && game->map[game->player.y][game->player.x + 1] != '1')
 		game->player.x++;
-	if (!(game->player.x == game->exit.x && game->player.y == game->exit.y))
+	if (!player_exit(game))
 		game->map[game->player.y][game->player.x] = 'P';
 }
 
 void	is_exit(t_game *game)
 {
-	if (game->exit.stat == 1 && (game->player.x == game->exit.x \
-				&& game->player.y == game->exit.y))
+	if (game->exit.stat == 1 && player_exit(game))
 		exit(0);
 }
 

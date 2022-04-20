@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int					next_line(char **backup, char **line)
+int	next_line(char **backup, char **line)
 {
 	char			*temp;
 	int				i;
@@ -34,7 +34,7 @@ int					next_line(char **backup, char **line)
 	return (1);
 }
 
-int					last_line(char **backup, char **line, int res)
+int	last_line(char **backup, char **line, int res)
 {
 	if (res < 0)
 		return (-1);
@@ -51,7 +51,7 @@ int					last_line(char **backup, char **line, int res)
 	return (0);
 }
 
-int					get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*backup[OPEN_MAX];
 	char			buf[BUFFER_SIZE + 1];
@@ -59,8 +59,10 @@ int					get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	while ((res = read(fd, buf, BUFFER_SIZE)) > 0)
+	res = 1;
+	while (res > 0)
 	{
+		res = read(fd, buf, BUFFER_SIZE);
 		buf[res] = '\0';
 		backup[fd] = ft_strjoin(backup[fd], buf);
 		if (ft_strchr(backup[fd], '\n') != NULL)

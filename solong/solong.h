@@ -32,8 +32,8 @@ typedef struct s_player {
 }				t_player;
 
 typedef struct s_exit {
-	int	x;
-	int	y;
+	int	x[100];
+	int	y[100];
 	int	stat;
 	int	count;
 }				t_exit;

@@ -17,8 +17,20 @@ int	close_exit(void)
 	exit(0);
 }
 
-void	error_exit(char *str)
+void	error_exit(t_game *game, char *str)
 {
+	int	i;
+
+	i = 0;
+	if (game)
+	{
+		while (i < 0)
+		{
+			free(game->map[i]);
+			i++;
+		}
+		free(game->map);
+	}
 	ft_putendl_fd(str, 1);
 	exit(0);
 }
@@ -46,11 +58,11 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		error_exit("Correct usage:./so_long [MAP_FILE].ber");
+		error_exit(0, "Correct usage:./so_long [MAP_FILE].ber");
 	if (!init_game(&game, argv[1]))
-		error_exit("ERROR\nwrong row size");
+		error_exit(&game, "ERROR\nwrong row size");
 	if (!valid_table(&game))
-		error_exit("ERROR\nnot valid table");
+		error_exit(&game, "ERROR\nnot valid table");
 	draw_map(&game);
 	mlx_hook(game.win, KEY_EVENT_PRESS, 0, &key_press, &game);
 	mlx_hook(game.win, KEY_EVENT_EXIT, 0, &close_exit, 0);

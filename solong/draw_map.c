@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -43,8 +42,10 @@ void	draw_portal(t_game *game)
 {
 	int	x;
 	int	y;
+	int	i;
 
 	y = 0;
+	i = 0;
 	while (y < game->row)
 	{
 		x = 0;
@@ -56,8 +57,8 @@ void	draw_portal(t_game *game)
 				"image/exit.xpm", &game->img.width, &game->img.height);
 				mlx_put_image_to_window(game->mlx, game->win, game->img.img, \
 						TILE_SIZE * x, TILE_SIZE * y);
-				game->exit.x = x;
-				game->exit.y = y;
+				game->exit.x[i] = x;
+				game->exit.y[i++] = y;
 			}
 			x++;
 		}

@@ -12,10 +12,10 @@
 
 #include "get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t i;
-	size_t count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -27,7 +27,7 @@ size_t		ft_strlen(const char *s)
 	return (count);
 }
 
-char		*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while (*s != (char)c)
 	{
@@ -38,7 +38,7 @@ char		*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-char		*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	char	*newstr;
 	int		i;
@@ -56,7 +56,7 @@ char		*ft_strdup(const char *s1)
 	return (newstr);
 }
 
-char		*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*newstr;
 	int		i;
@@ -66,8 +66,10 @@ char		*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!(s1) && !(s2))
 		return (NULL);
-	if (!(s1) || !(s2))
-		return (!(s1) ? ft_strdup(s2) : ft_strdup(s1));
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
 	newstr = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!newstr)
 		return (NULL);
@@ -78,9 +80,7 @@ char		*ft_strjoin(char *s1, char *s2)
 	}
 	free(s1);
 	while (s2[j] != '\0')
-	{
 		newstr[i++] = s2[j++];
-	}
 	newstr[i] = '\0';
 	return (newstr);
 }
