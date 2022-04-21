@@ -12,28 +12,29 @@
 
 #include "header.h"
 
-void swap ( int* a, int* b )
-{ int t = *a; *a = *b; *b = t; }
-struct Node *lastNode(struct Node *root)
+int countList(struct Node *head, struct Node *tail)
 {
-    while (root && root->next)
-        root = root->next;
-    return root;
+    int i;
+
+    i = 1;
+    while (head != tail)
+    {
+        i++;
+        head = head->next;
+    }
+    return (i);
 }
 
 struct Node *last_node(struct Node *head)
 {
 	struct Node *temp = head;
 	while (temp != NULL && temp->next != NULL)
-	{
 		temp = temp->next;
-	}
 	return temp;
 }
 
 struct Node *parition(struct Node *first, struct Node *last)
 {
-	//Get first node of given linked list
 	struct Node *pivot = first;
 	struct Node *front = first;
 	int temp = 0;
@@ -42,58 +43,77 @@ struct Node *parition(struct Node *first, struct Node *last)
 		if (front->data < last->data)
 		{
 			pivot = first;
-			//Swap node value
 			temp = first->data;
 			first->data = front->data;
 			front->data = temp;
-			//Visit to next node
 			first = first->next;
 		}
-		//Visit to next node
 		front = front->next;
 	}
-	//Change last node value to current node
 	temp = first->data;
 	first->data = last->data;
 	last->data = temp;
 	return pivot;
 }
-//Perform quick sort in given linked list
+
+void sortTwo(struct Node *first)
+{
+    int temp = 0;
+    if(first->data > first->next->data)
+        sa(first);
+    return ;
+}
+
+void sortThree(struct Node *first, struct Node *last)
+{
+    int temp = 0;
+    int temp2 = 0;
+    if(first->data < last->data && first->next->data > last->data)
+    {
+        temp = first->next->data;
+        first->next->data = last->data;
+        last->data = temp;
+    }
+    if(first->data < last->data && first->next->data < first->data)
+        sa(first);
+    if(first->data > first->next->data && first->next->data > last->data)
+    {
+        temp = first->data;
+        first->data = last->data;
+        last->data = temp;
+    }
+    if(first->data > last->data && first->next->data > first->data)
+    {
+        temp = last->data;
+        temp2 = first->data;
+        last->data = first->next->data;
+        first->data = temp;
+        first->next->data = temp2;
+    }
+    if(first->data > last->data && last->data > first->next->data)
+    {
+        temp = first->next->data;
+        temp2 = last->data;
+        last->data = first->data;
+        first->data = temp;
+        first->next->data = temp2;
+    }
+    return ;
+}
+
 void quick_sort(struct Node *first, struct Node *last)
 {
 	if (first == last)
-	{
 		return;
-	}
+    if (countList(first, last) == 2)
+        return (sortTwo(first));
+    if (countList(first, last) == 3)
+        return (sortThree(first, last));
 	struct Node *pivot = parition(first, last);
 	if (pivot != NULL && pivot->next != NULL)
-	{
 		quick_sort(pivot->next, last);
-	}
 	if (pivot != NULL && first != pivot)
-	{
 		quick_sort(first, pivot);
-	}
-}
-void printList(struct Node *head)
-{
-    while (head)
-    {
-        printf("%d ", head->data);
-        head = head->next;
-    }
-    printf("\n");
-}
-
-void push(struct Node** head_ref, int new_data)
-{
-    struct Node* new_node = (struct Node*)
-               malloc(sizeof(struct Node));
-    new_node->data = new_data;
-    new_node->prev = NULL;
-    new_node->next = (*head_ref);
-    if ((*head_ref) != NULL) (*head_ref)->prev = new_node ;
-    (*head_ref) = new_node;
 }
 
 void append(struct Node** head_ref, int new_data){
@@ -111,16 +131,18 @@ void append(struct Node** head_ref, int new_data){
     last->next = new_node;
 }
 
-// Driver Code
 int main(int argc, char **argv)
 {
-    struct Node *a = NULL;
+    Deque a;
+    Deque b;
+    DequeInit(&a);
+    DequeInit(&b);
     int i;
 
     i = 1;
     while(i < argc)//에러처리에러치리
     {
-        if(!(-2147483647 <= ft_atoi(argv[i]) && ft_atoi(argv[i]) <= 2147483647) || ft_atoi(argv[i]) == 0)
+        if(!(-2147483647 <= ft_atoi(argv[i]) && ft_atoi(argv[i]) <= 2147483647) || ft_atoi(argv[i]) == 0)//같은 경우 여러개 왔을때도 걸러야됨
         {
             printf("error\n");
             return (0);
@@ -129,12 +151,9 @@ int main(int argc, char **argv)
     }
     i = 1;
     while(i < argc)
-    {
-        append(&a, ft_atoi(argv[i]));
-        i++;
-    }
-    printList(a);
-    quick_sort(a, last_node(a));
-    printList(a);
+        DQAddLast(&a, atoi(argv[i++]));
+    show(&a);
+    quick_sort(a.head, a.tail);
+    show(&a);
     return (0);
 }

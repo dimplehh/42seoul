@@ -23,11 +23,22 @@ typedef struct Node
     int data;
     struct Node *next;
 }Node;
-struct Node *head;
-struct Node *tail;
+
+typedef struct Deque
+{
+    Node* head;
+    Node* tail;
+}Deque;
+
 void insert(int data);
 void removeFront();
 void show();
 int	ft_atoi(const char *str);
+void sa(struct Node *first);
+void show(Deque* pdeq);
+int DQsize(Deque* pdeq);
+void DQAddLast(Deque* pdeq, int data);
+int DQIsEmpty(Deque* pdeq);
+void DequeInit(Deque* pdeq);
 
 #endif
