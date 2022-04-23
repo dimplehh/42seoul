@@ -12,7 +12,12 @@
 
 #include "header.h"
 
-int main(int argc, char **argv)
+void    sort(Deque *pdeqa, Deque *pdeqb)
+{
+
+}
+
+int     main(int argc, char **argv)
 {
     Deque a;
     Deque b;
@@ -25,11 +30,14 @@ int main(int argc, char **argv)
     i = 1;
     while(i < argc)
         DQAddLast(&a, atoi(argv[i++]));
-    i = 1;
-    while(i < argc)
-        DQAddLast(&b, atoi(argv[i++]));
     show(&a);
+    //sa(&a);
+    //sb(&b);
+    //ss(&a, &b);
+    //pa(&a, &b);
+    //rr(&a, &b);
     rrr(&a, &b);
+    sort(&a, &b);
     show(&a);
     show(&b);
     return (0);

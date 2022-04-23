@@ -14,31 +14,43 @@
 
 void sa(Deque *pdeq)
 {
-    int temp = 0;
-    temp = pdeq->head->data;
-    pdeq->head->data = pdeq->head->next->data;
-    pdeq->head->next->data = temp;
-    printf("sa\n");
+    if (pdeq->head && pdeq->head->next)
+    {
+        int temp = 0;//지금은 인덱스값만 바뀌지만 data까지 바뀌도록 차후 수정
+        temp = pdeq->head->index;
+        pdeq->head->index = pdeq->head->next->index;
+        pdeq->head->next->index = temp;
+        printf("sa\n");
+    }
 }
 
 void sb(Deque *pdeq)
 {
-    int temp = 0;
-    temp = pdeq->head->data;
-    pdeq->head->data = pdeq->head->next->data;
-    pdeq->head->next->data = temp;
-    printf("sa\n");
+    if (pdeq->head && pdeq->head->next)
+    {
+        int temp = 0;
+        temp = pdeq->head->index;
+        pdeq->head->index = pdeq->head->next->index;
+        pdeq->head->next->index = temp;
+        printf("sb\n");
+    }
 }
 
 void ss(Deque *pdeqa, Deque *pdeqb)
 {
     int temp = 0;
-    temp = pdeqa->head->data;
-    pdeqa->head->data = pdeqa->head->next->data;
-    pdeqa->head->next->data = temp;
-    temp = pdeqb->head->data;
-    pdeqb->head->data = pdeqb->head->next->data;
-    pdeqb->head->next->data = temp;
+    if (pdeqa->head && pdeqa->head->next)
+    {
+        temp = pdeqa->head->index;
+        pdeqa->head->index = pdeqa->head->next->index;
+        pdeqa->head->next->index = temp;
+    }
+    if (pdeqb->head && pdeqb->head->next)
+    {
+        temp = pdeqb->head->index;
+        pdeqb->head->index = pdeqb->head->next->index;
+        pdeqb->head->next->index = temp;
+    }
     printf("ss\n");
 }
 
@@ -66,6 +78,8 @@ void pb(Deque *pdeqa, Deque *pdeqb)
 
 void ra(Deque *pdeqa)
 {
+    if(pdeqa->head == NULL)
+        return ;
     Node *temp = pdeqa->head;
     pdeqa->head = pdeqa->head->next;
     pdeqa->tail->next = temp;
@@ -75,6 +89,8 @@ void ra(Deque *pdeqa)
 
 void rb(Deque *pdeqb)
 {
+    if (pdeqb->head == NULL)
+        return ;
     Node *temp = pdeqb->head;
     pdeqb->head = pdeqb->head->next;
     pdeqb->tail->next = temp;
@@ -84,19 +100,27 @@ void rb(Deque *pdeqb)
 
 void rr(Deque *pdeqa, Deque *pdeqb)
 {
-    Node *temp1 = pdeqa->head;
-    pdeqa->head = pdeqa->head->next;
-    pdeqa->tail->next = temp1;
-    pdeqa->tail = pdeqa->tail->next;
-    Node *temp2 = pdeqb->head;
-    pdeqb->head = pdeqb->head->next;
-    pdeqb->tail->next = temp2;
-    pdeqb->tail = pdeqb->tail->next;
+    if (pdeqa->head)
+    {
+        Node *temp1 = pdeqa->head;
+        pdeqa->head = pdeqa->head->next;
+        pdeqa->tail->next = temp1;
+        pdeqa->tail = pdeqa->tail->next;
+    }
+    if (pdeqb->head)
+    {
+        Node *temp2 = pdeqb->head;
+        pdeqb->head = pdeqb->head->next;
+        pdeqb->tail->next = temp2;
+        pdeqb->tail = pdeqb->tail->next;   
+    }
     printf("rr\n");
 }
 
 void rra(Deque *pdeqa)
 {
+    if(pdeqa->head == NULL)
+        return ;
     Node *temp = pdeqa->head;
     Node *temp2 = pdeqa->tail;
     pdeqa->tail = pdeqa->tail->prev;
@@ -107,6 +131,8 @@ void rra(Deque *pdeqa)
 
 void rrb(Deque *pdeqb)
 {
+    if(pdeqb->head == NULL)
+        return ;
     Node *temp = pdeqb->head;
     Node *temp2 = pdeqb->tail;
     pdeqb->tail = pdeqb->tail->prev;
@@ -117,15 +143,21 @@ void rrb(Deque *pdeqb)
 
 void rrr(Deque *pdeqa, Deque *pdeqb)
 {
-    Node *temp = pdeqa->head;
-    Node *temp2 = pdeqa->tail;
-    pdeqa->tail = pdeqa->tail->prev;
-    pdeqa->head = temp2;
-    pdeqa->head->next = temp;
-    Node *temp3 = pdeqb->head;
-    Node *temp4 = pdeqb->tail;
-    pdeqb->tail = pdeqb->tail->prev;
-    pdeqb->head = temp4;
-    pdeqb->head->next = temp3;
+    if (pdeqa->head)
+    {
+        Node *temp = pdeqa->head;
+        Node *temp2 = pdeqa->tail;
+        pdeqa->tail = pdeqa->tail->prev;
+        pdeqa->head = temp2;
+        pdeqa->head->next = temp;
+    }
+    if (pdeqb->head)
+    {
+        Node *temp3 = pdeqb->head;
+        Node *temp4 = pdeqb->tail;
+        pdeqb->tail = pdeqb->tail->prev;
+        pdeqb->head = temp4;
+        pdeqb->head->next = temp3;
+    }
     printf("rrr\n");
 }
