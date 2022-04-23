@@ -12,11 +12,11 @@
 
 #include "header.h"
 
-void sa(Deque *pdeq)
+void sa(Deque *pdeq)//차후에 데이터, 인덱스 둘 다 바뀌도록 설정
 {
+    int temp;
     if (pdeq->head && pdeq->head->next)
     {
-        int temp = 0;//지금은 인덱스값만 바뀌지만 data까지 바뀌도록 차후 수정
         temp = pdeq->head->index;
         pdeq->head->index = pdeq->head->next->index;
         pdeq->head->next->index = temp;
@@ -59,42 +59,65 @@ void pa(Deque *pdeqa, Deque *pdeqb)
     if(pdeqb->head == NULL)
         return ;
     Node *newHead = pdeqb->head;
+    if (pdeqb->head->next)
+        pdeqb->head = pdeqb->head->next;
     pdeqb->head = pdeqb->head->next;
-    newHead->next = pdeqa->head;
-    pdeqa->head = newHead;
+    if (pdeqa->head == NULL)
+    {
+        DQAddLast(pdeqa, newHead->data);
+        pdeqa->head->index = newHead->index;
+    }
+    else
+    {
+        newHead->next = pdeqa->head;
+        pdeqa->head = newHead;
+    }
     printf("pa\n");
 }
 
 void pb(Deque *pdeqa, Deque *pdeqb)
 {
-    if(pdeqa->head == NULL)
-        return ;
+    if(!pdeqa->head)
+        return;
     Node *newHead = pdeqa->head;
-    pdeqa->head = pdeqa->head->next;
-    newHead->next = pdeqb->head;
-    pdeqb->head = newHead;
+    if (pdeqa->head->next)
+        pdeqa->head = pdeqa->head->next;
+    else
+        pdeqa->head = NULL;
+    if (pdeqb->head == NULL)
+    {
+        DQAddLast(pdeqb, newHead->data);
+        pdeqb->head->index = newHead->index;
+    }
+    else
+    {
+        newHead->next = pdeqb->head;
+        pdeqb->head = newHead;
+    }
     printf("pb\n");
 }
 
 void ra(Deque *pdeqa)
 {
-    if(pdeqa->head == NULL)
-        return ;
-    Node *temp = pdeqa->head;
-    pdeqa->head = pdeqa->head->next;
-    pdeqa->tail->next = temp;
-    pdeqa->tail = pdeqa->tail->next;
+    if (pdeqa->head && pdeqa->head->next)
+    {
+        Node *temp = pdeqa->head;
+        pdeqa->head = pdeqa->head->next;
+        pdeqa->tail->next = temp;
+        pdeqa->tail = pdeqa->tail->next;
+    }
     printf("ra\n");
 }
 
 void rb(Deque *pdeqb)
 {
-    if (pdeqb->head == NULL)
-        return ;
-    Node *temp = pdeqb->head;
-    pdeqb->head = pdeqb->head->next;
-    pdeqb->tail->next = temp;
-    pdeqb->tail = pdeqb->tail->next;
+    if (pdeqb->head && pdeqb->head->next)
+    {
+        Node *temp = pdeqb->head;
+        pdeqb->head = pdeqb->head->next;
+        pdeqb->tail->next = temp;
+        pdeqb->tail = pdeqb->tail->next;
+    }
     printf("rb\n");
 }
 

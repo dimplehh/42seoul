@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# define CHUNK 15  
 
 typedef struct Node
 {

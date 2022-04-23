@@ -12,9 +12,27 @@
 
 #include "header.h"
 
-void    sort(Deque *pdeqa, Deque *pdeqb)
+void    sort(int count, Deque *pdeqa, Deque *pdeqb)
 {
-
+    int num = 0;
+    int i = 1;
+    while (i < count && pdeqa->head)
+    {
+        if(pdeqa->head->index <= num)
+        {
+            pb(pdeqa, pdeqb);
+            num++;
+        }
+        if(pdeqa->head && num < pdeqa->head->index && pdeqa->head->index <= num + CHUNK)
+        {
+            pb(pdeqa, pdeqb);
+            rb(pdeqb);
+            num++;
+        }
+        if(pdeqa->head && num + CHUNK < pdeqa->head->index)
+            ra(pdeqa);
+        i++;
+    }
 }
 
 int     main(int argc, char **argv)
@@ -30,14 +48,7 @@ int     main(int argc, char **argv)
     i = 1;
     while(i < argc)
         DQAddLast(&a, atoi(argv[i++]));
-    show(&a);
-    //sa(&a);
-    //sb(&b);
-    //ss(&a, &b);
-    //pa(&a, &b);
-    //rr(&a, &b);
-    rrr(&a, &b);
-    sort(&a, &b);
+    sort(argc, &a, &b);
     show(&a);
     show(&b);
     return (0);
