@@ -34,6 +34,7 @@ typedef struct Deque
 void insert(int data);
 void removeFront();
 void show();
+int check(int argc, char **argv);
 int	ft_atoi(const char *str);
 void sa(Deque *pdeq);
 void sb(Deque *pdeq);
