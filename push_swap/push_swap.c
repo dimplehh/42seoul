@@ -6,34 +6,26 @@
 /*   By: hyunhlee <hyunhlee@42seoul.student.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:43:31 by hyunhlee          #+#    #+#             */
-/*   Updated: 2021/12/07 17:04:54 by hyunhlee         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:38:38 by hyunhlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int countList(struct Node *head, struct Node *tail)
+int	countList(Node *head, Node *tail)
 {
-    int i;
+	int i;
 
-    i = 1;
-    while (head != tail)
-    {
-        i++;
-        head = head->next;
-    }
-    return (i);
+	i = 1;
+	while (head != tail)
+	{
+		i++;
+		head = head->next;
+	}
+	return (i);
 }
 
-struct Node *last_node(struct Node *head)
-{
-	struct Node *temp = head;
-	while (temp != NULL && temp->next != NULL)
-		temp = temp->next;
-	return temp;
-}
-
-struct Node *parition(struct Node *first, struct Node *last)
+Node *parition(Node *first, Node *last)
 {
 	struct Node *pivot = first;
 	struct Node *front = first;
@@ -53,15 +45,15 @@ struct Node *parition(struct Node *first, struct Node *last)
 	temp = first->data;
 	first->data = last->data;
 	last->data = temp;
-	return pivot;
+	return (pivot);
 }
 
-void sortTwo(struct Node *first)
+void	sortTwo(struct Node *first)
 {
-    int temp = 0;
-    if(first->data > first->next->data)
-        sa(first);
-    return ;
+	int temp = 0;
+	if (first->data > first->next->data)
+		//sa(first);
+	return ;
 }
 
 void sortThree(struct Node *first, struct Node *last)
@@ -75,7 +67,7 @@ void sortThree(struct Node *first, struct Node *last)
         last->data = temp;
     }
     if(first->data < last->data && first->next->data < first->data)
-        sa(first);
+        //sa(first);
     if(first->data > first->next->data && first->next->data > last->data)
     {
         temp = first->data;
@@ -116,21 +108,6 @@ void quick_sort(struct Node *first, struct Node *last)
 		quick_sort(first, pivot);
 }
 
-void append(struct Node** head_ref, int new_data){
-    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
-    struct Node* last = *head_ref;
-    new_node->data = new_data;
-    new_node->next = NULL;
-    if(*head_ref ==  NULL){
-        *head_ref = new_node;
-        return;
-    }
-    while(last->next != NULL){
-        last = last->next;
-    }
-    last->next = new_node;
-}
-
 int main(int argc, char **argv)
 {
     Deque a;
@@ -140,9 +117,9 @@ int main(int argc, char **argv)
     int i;
 
     i = 1;
-    while(i < argc)//에러처리에러치리
+    while(i < argc)//에러처리에러치리, 중복검사
     {
-        if(!(-2147483647 <= ft_atoi(argv[i]) && ft_atoi(argv[i]) <= 2147483647) || ft_atoi(argv[i]) == 0)//같은 경우 여러개 왔을때도 걸러야됨
+        if(!(-2147483647 <= ft_atoi(argv[i]) && ft_atoi(argv[i]) <= 2147483647) || ft_atoi(argv[i]) == 0)
         {
             printf("error\n");
             return (0);
@@ -152,8 +129,13 @@ int main(int argc, char **argv)
     i = 1;
     while(i < argc)
         DQAddLast(&a, atoi(argv[i++]));
+    i = 1;
+    while(i < argc)
+        DQAddLast(&b, atoi(argv[i++]));
     show(&a);
-    quick_sort(a.head, a.tail);
+    rrr(&a, &b);
+    //quick_sort(a.head, a.tail);
     show(&a);
+    show(&b);
     return (0);
 }

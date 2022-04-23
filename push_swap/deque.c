@@ -14,7 +14,25 @@ int DQIsEmpty(Deque* pdeq)
         return 0;
 }
 
-void DQAddLast(Deque* pdeq, int data)
+void    DQIndexing(Deque* pdeq)
+{
+    Node* cur = pdeq->head;
+    if (DQIsEmpty(pdeq))
+        pdeq->head->index = 0;
+    else
+    {
+        while (cur != pdeq->tail)
+        {
+            if(cur->data < pdeq->tail->data)
+                pdeq->tail->index++;
+            else
+                cur->index++;
+            cur = cur->next;
+        }
+    }
+}
+
+void    DQAddLast(Deque* pdeq, int data)
 {
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
@@ -25,6 +43,7 @@ void DQAddLast(Deque* pdeq, int data)
         pdeq->tail->next = newNode;
     newNode->next = NULL;
     pdeq->tail = newNode;
+    DQIndexing(pdeq);//인덱싱
 }
 
 int DQsize(Deque* pdeq)
@@ -50,10 +69,10 @@ void show(Deque* pdeq)
     {
         while (cur != pdeq->tail)
         {
-            printf("%d ", cur->data);
+            printf("%d ", cur->index);
             cur = cur->next;
         }
-        printf("%d ", cur->data);
+        printf("%d ", cur->index);
     }
     printf("\n");
 }
