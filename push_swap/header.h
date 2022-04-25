@@ -20,16 +20,16 @@
 
 typedef struct Node
 {
-    struct Node *prev;
-    int data;
-    int index;
-    struct Node *next;
+	struct Node *prev;
+	int data;
+	int index;
+	struct Node *next;
 }Node;
 
 typedef struct Deque
 {
-    Node* head;
-    Node* tail;
+	Node* head;
+	Node* tail;
 }Deque;
 
 void insert(int data);
@@ -53,5 +53,6 @@ int DQsize(Deque* pdeq);
 void DQAddLast(Deque* pdeq, int data);
 int DQIsEmpty(Deque* pdeq);
 void DequeInit(Deque* pdeq);
+void    sort_small(Deque *pdeqa, Deque *pdeqb);
 
 #endif

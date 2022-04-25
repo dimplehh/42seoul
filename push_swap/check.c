@@ -48,9 +48,25 @@ int isDuple(int argc, char** argv)
     return (0);
 }
 
+int isSort(int argc, char **argv)
+{
+    int i;
+
+    i = 0;
+    while (i < argc - 1)
+    {
+        if (ft_atoi(argv[i]) > ft_atoi(argv[i + 1]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int check(int argc, char **argv)
 {
-    if (argc == 1 || !isNumber(argc, argv) || !isInt(argc, argv))
+    if (argc == 1)
+        return (0);
+    if (!isNumber(argc, argv) || !isInt(argc, argv))
     {
         printf("Error: is not int\n");
         return (0);
@@ -58,6 +74,11 @@ int check(int argc, char **argv)
     else if (isDuple(argc, argv))
     {
         printf("Error: number is duplicated\n");
+        return (0);
+    }
+    if (isSort(argc, argv))
+    {
+        printf("OK\n");
         return (0);
     }
     return (1);
