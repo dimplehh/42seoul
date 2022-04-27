@@ -38,9 +38,9 @@ long long	ft_atol(const char *str)
 	while (str[i] != '\0' && '0' <= str[i] && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
-		if (result > 999999999999 && sign == 1)
+		if (result > 9223372036854775807 && sign == 1)
 			return (-1);
-		if (result > 999999999999 && sign == -1)
+		if (result > 9223372036854775807 && sign == -1)
 			return (0);
 		i++;
 	}

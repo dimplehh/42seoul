@@ -30,6 +30,7 @@ typedef struct Deque
 	t_Node	*tail;
 }t_Deque;
 
+char		**m_free(char const **dst, int j);
 int			ft_atoi(const char *str);
 long long	ft_atol(const char *str);
 int			ft_col(char const *s, char c);

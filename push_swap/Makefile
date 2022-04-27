@@ -18,11 +18,11 @@ deque.c deque2.c check.c check2.c sortSmall.c
 OBJS=${SOURCE_FILE:.c=.o}
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CCFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:${OBJS}
 	make -C libft
-	${CC} ${CFLAGS} -o ${NAME} -L. libft/libft.a ${OBJS}
+	${CC} ${CCFLAGS} -o ${NAME} -L. libft/libft.a ${OBJS}
 
 all:${NAME}
 
