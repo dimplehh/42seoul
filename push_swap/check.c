@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "header.h"
-#include <ctype.h>
 
-int	is_number(int argc, char *argv)
+int	is_number(char *argv)
 {
 	int	j;
 
 	j = 0;
-	while (j < ft_strlen(argv))
+	while (j < (int)ft_strlen(argv))
 	{
 		if (!ft_isdigit(argv[j]))
 			if (!(argv[0] == '+' || argv[0] == '-'))
@@ -28,7 +27,7 @@ int	is_number(int argc, char *argv)
 	return (1);
 }
 
-int	is_int(int argc, char	*argv)
+int	is_int(char	*argv)
 {
 	if (ft_atol(argv) != ft_atoi(argv))
 		return (0);
@@ -52,7 +51,7 @@ int	check(int argc, char **argv, t_Deque *a)
 		{
 			while (j < ft_col(argv[i], ' '))
 			{
-				if (!is_number(argc, split[j]) || !is_int(argc, split[j]))
+				if (!is_number(split[j]) || !is_int(split[j]))
 					return (0);
 				dq_add_last(a, ft_atoi(split[j]));
 				j++;

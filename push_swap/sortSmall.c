@@ -29,7 +29,7 @@ int	is_sort(t_Deque *pdeq)
 	return (1);
 }
 
-void	sort_three(t_Deque *a, t_Deque *b)
+void	sort_three(t_Deque *a)
 {
 	if (a->head->index < a->tail->index && \
 	a->head->next->index > a->tail->index)
@@ -54,7 +54,7 @@ void	sort_three(t_Deque *a, t_Deque *b)
 		ra(a);
 }
 
-void	sort_idx(t_Deque *a, t_Deque *b, int idx)
+void	sort_idx(t_Deque *a, int idx)
 {
 	int		i;
 	t_Node	*cur;
@@ -80,12 +80,12 @@ void	sort_idx(t_Deque *a, t_Deque *b, int idx)
 
 void	sort_five(t_Deque *a, t_Deque *b)
 {
-	sort_idx(a, b, 0);
+	sort_idx(a, 0);
 	pb(a, b);
-	sort_idx(a, b, 1);
+	sort_idx(a, 1);
 	pb(a, b);
 	if (!is_sort(a))
-		sort_three(a, b);
+		sort_three(a);
 	pa(a, b);
 	pa(a, b);
 }
@@ -96,14 +96,14 @@ void	sort_small(t_Deque *pdeqa, t_Deque *pdeqb)
 		if (pdeqa->head->index > pdeqa->head->next->index)
 			sa(pdeqa);
 	if (dq_size(pdeqa) == 3)
-		sort_three(pdeqa, pdeqb);
+		sort_three(pdeqa);
 	if (dq_size(pdeqa) == 4)
 	{
-		sort_idx(pdeqa, pdeqb, 0);
+		sort_idx(pdeqa, 0);
 		if (!is_sort(pdeqa))
 		{
 			pb(pdeqa, pdeqb);
-			sort_three(pdeqa, pdeqb);
+			sort_three(pdeqa);
 			pa(pdeqa, pdeqb);
 		}
 	}
