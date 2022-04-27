@@ -1,85 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunhlee <hyunhlee@42seoul.student.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/27 11:43:26 by hyunhlee          #+#    #+#             */
+/*   Updated: 2022/04/27 11:45:28 by hyunhlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 #include <ctype.h>
 
-int isNumber(int argc, char** argv)
+int	is_number(int argc, char *argv)
 {
-    int i = 1;
-    int j;
-    while (i < argc)
-    {
-        j = 0;
-        while (j < strlen(argv[i]))
-        {
-            if (isdigit(argv[i][j++]) == 0)
-                return 0;
-        }
-        i++;
-    }
-    return 1;
+	int	j;
+
+	j = 0;
+	while (j < ft_strlen(argv))
+	{
+		if (!ft_isdigit(argv[j]))
+			if (!(argv[0] == '+' || argv[0] == '-'))
+				return (0);
+		j++;
+	}
+	return (1);
 }
 
-int isInt(int argc, char** argv)
+int	is_int(int argc, char	*argv)
 {
-    int i = 1;
-    while (i < argc)
-    {
-        if (atol(argv[i]) != atoi(argv[i]))
-            return 0;
-        i++;
-    }
-    return 1;
+	if (ft_atol(argv) != ft_atoi(argv))
+		return (0);
+	return (1);
 }
 
-int isDuple(int argc, char** argv)
+int	check(int argc, char **argv, t_Deque *a)
 {
-    int i = 1;
-    int j = 2;
-    while (i < argc)
-    {
-        j = i+1;
-        while (j < argc)
-        {
-            if(atoi(argv[i]) == atoi(argv[j]))
-                return (1);
-            j++;
-        }
-        i++;
-    }
-    return (0);
-}
+	int		i;
+	int		j;
+	char	**split;
 
-int isSort(int argc, char **argv)
-{
-    int i;
-
-    i = 0;
-    while (i < argc - 1)
-    {
-        if (ft_atoi(argv[i]) > ft_atoi(argv[i + 1]))
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int check(int argc, char **argv)
-{
-    if (argc == 1)
-        return (0);
-    if (!isNumber(argc, argv) || !isInt(argc, argv))
-    {
-        printf("Error: is not int\n");
-        return (0);
-    }
-    else if (isDuple(argc, argv))
-    {
-        printf("Error: number is duplicated\n");
-        return (0);
-    }
-    if (isSort(argc, argv))
-    {
-        printf("OK\n");
-        return (0);
-    }
-    return (1);
+	i = 1;
+	j = 0;
+	if (argc == 1)
+		return (0);
+	while (i < argc)
+	{
+		split = ft_split(argv[i], ' ');
+		if (split != NULL)
+		{
+			while (j < ft_col(argv[i], ' '))
+			{
+				if (!is_number(argc, split[j]) || !is_int(argc, split[j]))
+					return (0);
+				dq_add_last(a, ft_atoi(split[j]));
+				j++;
+			}
+			j = 0;
+		}
+		i++;
+	}
+	return (1);
 }

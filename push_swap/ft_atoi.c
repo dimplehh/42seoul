@@ -12,8 +12,8 @@
 
 int	myisspace(const char *str, int i)
 {
-	if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-			|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+	if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'\
+	|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
 		return (1);
 	return (0);
 }

@@ -1,29 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   deque.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunhlee <hyunhlee@42seoul.student.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/27 11:49:32 by hyunhlee          #+#    #+#             */
+/*   Updated: 2022/04/27 11:49:33 by hyunhlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
-void DequeInit(Deque* pdeq)
+void	dq_indexing(t_Deque	*pdeq)
 {
-	pdeq->head = NULL;
-	pdeq->tail = NULL;
-}
+	t_Node	*cur;
 
-int DQIsEmpty(Deque* pdeq)
-{
-	if (pdeq->head == NULL)
-		return 1;
-	else
-		return 0;
-}
-
-void    DQIndexing(Deque* pdeq)
-{
-	Node* cur = pdeq->head;
-	if (DQIsEmpty(pdeq))
+	cur = pdeq->head;
+	if (dq_is_empty(pdeq))
 		pdeq->head->index = 0;
 	else
 	{
 		while (cur != pdeq->tail)
 		{
-			if(cur->data < pdeq->tail->data)
+			if (cur->data < pdeq->tail->data)
 				pdeq->tail->index++;
 			else
 				cur->index++;
@@ -32,48 +32,49 @@ void    DQIndexing(Deque* pdeq)
 	}
 }
 
-void    DQAddLast(Deque* pdeq, int data)
+int	dq_remove_first(t_Deque	*pdeq)
 {
-	Node* newNode = (Node*)malloc(sizeof(Node));
-	newNode->data = data;
-	newNode->prev = pdeq->tail;
-	if (DQIsEmpty(pdeq))
-		pdeq->head = newNode;
+	t_Node	*newnode;
+	int		index;
+
+	newnode = pdeq->head;
+	index = pdeq->head->index;
+	pdeq->head = pdeq->head->next;
+	if (pdeq->head == NULL)
+		pdeq->tail = NULL;
 	else
-		pdeq->tail->next = newNode;
-	newNode->next = NULL;
-	pdeq->tail = newNode;
-	DQIndexing(pdeq);
+		pdeq->head->prev = NULL;
+	free(newnode);
+	return (index);
 }
 
-int DQsize(Deque* pdeq)
+void	dq_add_last(t_Deque	*pdeq, int data)
 {
-	int i = 0;
-	Node* cur = pdeq->head;
-	if (!DQIsEmpty(pdeq))
-	{
-		while (cur != pdeq->tail)
-		{
-			cur = cur->next;
-			i++;
-		}
-		return (i + 1);
-	}
-	return (0);
+	t_Node	*newnode;
+
+	newnode = (t_Node *)malloc(sizeof(t_Node));
+	newnode->data = data;
+	newnode->prev = pdeq->tail;
+	if (dq_is_empty(pdeq))
+		pdeq->head = newnode;
+	else
+		pdeq->tail->next = newnode;
+	newnode->next = NULL;
+	pdeq->tail = newnode;
+	dq_indexing(pdeq);
 }
 
-void show(Deque* pdeq)
+void	dq_add_first(t_Deque	*pdeq, int index)
 {
-	Node* cur;
-	if (!DQIsEmpty(pdeq))
-	{
-		cur = pdeq->head;
-		while (cur != pdeq->tail)
-		{
-			printf("%d ", cur->index);
-			cur = cur->next;
-		}
-		printf("%d ", cur->index);
-	}
-	printf("\n");
+	t_Node	*newnode;
+
+	newnode = (t_Node *)malloc(sizeof(t_Node));
+	newnode->index = index;
+	newnode->next = pdeq->head;
+	if (dq_is_empty(pdeq))
+		pdeq->tail = newnode;
+	else
+		pdeq->head->prev = newnode;
+	newnode->prev = NULL;
+	pdeq->head = newnode;
 }

@@ -12,12 +12,12 @@
 
 #include "header.h"
 
-int isSortSmall(Deque *pdeq)
+int	is_sort(t_Deque *pdeq)
 {
-    int i;
-	Node	*cur;
+	int		i;
+	t_Node	*cur;
 
-    i = 0;
+	i = 0;
 	cur = pdeq->head;
 	while (cur != pdeq->tail)
 	{
@@ -26,46 +26,47 @@ int isSortSmall(Deque *pdeq)
 				return (0);
 		cur = cur->next;
 	}
-    return (1);
+	return (1);
 }
 
-void	sort_three(Deque *a, Deque *b)
+void	sort_three(t_Deque *a, t_Deque *b)
 {
-	int	temp;
-	int	temp2;
-
-	if (a->head->index < a->tail->index && a->head->next->index > a->tail->index)
+	if (a->head->index < a->tail->index && \
+	a->head->next->index > a->tail->index)
 	{
-		pb(a, b);
 		sa(a);
-		pa(a, b);
+		ra(a);
 	}
-	if (a->head->index < a->tail->index && a->head->next->index < a->head->index)
+	else if (a->head->index < a->tail->index && \
+	a->head->next->index < a->head->index)
 		sa(a);
-	if (a->head->index > a->head->next->index && a->head->next->index > a->tail->index)
+	else if (a->head->index > a->head->next->index && \
+	a->head->next->index > a->tail->index)
 	{
 		ra(a);
 		sa(a);
 	}
-	if (a->head->index > a->tail->index && a->head->next->index > a->head->index)
+	else if (a->head->index > a->tail->index && \
+	a->head->next->index > a->head->index)
 		rra(a);
-	if (a->head->index > a->tail->index && a->tail->index > a->head->next->index)
+	else if (a->head->index > a->tail->index && \
+	a->tail->index > a->head->next->index)
 		ra(a);
 }
 
-void	sort_idx(Deque *a, Deque *b, int idx)
+void	sort_idx(t_Deque *a, t_Deque *b, int idx)
 {
 	int		i;
-	Node	*cur;
- 
+	t_Node	*cur;
+
 	i = 0;
 	cur = a->head;
 	while (cur != NULL)
 	{
 		if (cur->index == idx)
 		{
-			if (i > DQsize(a) / 2)
-				while (DQsize(a) - i++ > 0)
+			if (i > dq_size(a) / 2)
+				while (dq_size(a) - i++ > 0)
 					rra(a);
 			else
 				while (i-- > 0)
@@ -77,38 +78,35 @@ void	sort_idx(Deque *a, Deque *b, int idx)
 	}
 }
 
-void	sort_four(Deque *a, Deque *b)
-{
-	sort_idx(a, b, 0);
-	if (!isSortSmall(a))
-	{
-		pb(a, b);
-		sort_three(a, b);
-		pa(a, b);
-	}
-}
-
-void	sort_five(Deque *a, Deque *b)
+void	sort_five(t_Deque *a, t_Deque *b)
 {
 	sort_idx(a, b, 0);
 	pb(a, b);
 	sort_idx(a, b, 1);
 	pb(a, b);
-	if (!isSortSmall(a))
+	if (!is_sort(a))
 		sort_three(a, b);
 	pa(a, b);
 	pa(a, b);
 }
 
-void	sort_small(Deque *pdeqa, Deque *pdeqb)
+void	sort_small(t_Deque *pdeqa, t_Deque *pdeqb)
 {
-	if (DQsize(pdeqa) == 2)
+	if (dq_size(pdeqa) == 2)
 		if (pdeqa->head->index > pdeqa->head->next->index)
 			sa(pdeqa);
-	if (DQsize(pdeqa) == 3)
+	if (dq_size(pdeqa) == 3)
 		sort_three(pdeqa, pdeqb);
-	if (DQsize(pdeqa) == 4)
-		sort_four(pdeqa, pdeqb);
-	if (DQsize(pdeqa) == 5)
+	if (dq_size(pdeqa) == 4)
+	{
+		sort_idx(pdeqa, pdeqb, 0);
+		if (!is_sort(pdeqa))
+		{
+			pb(pdeqa, pdeqb);
+			sort_three(pdeqa, pdeqb);
+			pa(pdeqa, pdeqb);
+		}
+	}
+	if (dq_size(pdeqa) == 5)
 		sort_five(pdeqa, pdeqb);
 }

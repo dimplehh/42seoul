@@ -12,60 +12,66 @@
 
 #include "header.h"
 
-void	sort(int count, Deque *pdeqa, Deque *pdeqb)
+int	chunk(int x)
+{
+	return (0.000000053 * x * x + 0.03 * x + 14.5);
+}
+
+void	sort(int count, t_Deque *pdeqa, t_Deque *pdeqb)
 {
 	int	num;
-	int	i;
 
 	num = 0;
-	i = 1;
-	while (i < count && pdeqa->head)
+	while (pdeqa->head)
 	{
 		if (pdeqa->head->index <= num)
 		{
 			pb(pdeqa, pdeqb);
 			num++;
 		}
-		if (pdeqa->head && num < pdeqa->head->index && \
-		pdeqa->head->index <= num + CHUNK)
+		else if (num < pdeqa->head->index && \
+		pdeqa->head->index <= num + chunk(count))
 		{
 			pb(pdeqa, pdeqb);
 			rb(pdeqb);
 			num++;
 		}
-		if (pdeqa->head && num + CHUNK < pdeqa->head->index)
+		else if (num + chunk(count) < pdeqa->head->index)
 			ra(pdeqa);
-		i++;
 	}
 }
 
-void	sort2(int cnt, Deque *pdeqa, Deque *pdeqb)
+int	in_sort2(int i, int cnt, t_Deque *pdeqa, t_Deque *pdeqb)
 {
-	int		max;
+	if (i > cnt / 2)
+	{
+		while (cnt - i++ > 0)
+			rrb(pdeqb);
+		pa(pdeqa, pdeqb);
+	}
+	else
+	{
+		while (i-- > 0)
+			rb(pdeqb);
+		pa(pdeqa, pdeqb);
+	}
+	return (i);
+}
+
+void	sort2(int cnt, t_Deque *pdeqa, t_Deque *pdeqb)
+{
 	int		i;
-	Node	*cur;
+	t_Node	*cur;
 
 	while (cnt > 1)
 	{
 		cur = pdeqb->head;
 		i = 0;
-		max = cnt - 1;
 		while (cur != NULL)
 		{
-			if (cur->index == max)
+			if (cur->index == cnt - 1)
 			{
-				if (i > cnt / 2)
-				{
-					while (cnt - i++ > 0)
-						rrb(pdeqb);
-					pa(pdeqa, pdeqb);
-				}
-				else
-				{
-					while (i-- > 0)
-						rb(pdeqb);
-					pa(pdeqa, pdeqb);
-				}
+				i = in_sort2(i, cnt, pdeqa, pdeqb);
 				break ;
 			}
 			cur = cur->next;
@@ -78,25 +84,26 @@ void	sort2(int cnt, Deque *pdeqa, Deque *pdeqb)
 
 int	main(int argc, char **argv)
 {
-	Deque	a;
-	Deque	b;
-	int		i;
+	t_Deque	a;
+	t_Deque	b;
+	int		size;
 
-	DequeInit(&a);
-	DequeInit(&b);
-	if (!check(argc, argv))
+	deque_init(&a);
+	deque_init(&b);
+	if (!check(argc, argv, &a))
+	{
+		ft_putendl_fd("ERROR", 1);
 		return (0);
-	i = 1;
-	while (i < argc)
-		DQAddLast(&a, atoi(argv[i++]));
-	show(&a);
-	if (DQsize(&a) <= 5)
+	}
+	size = dq_size(&a);
+	if (check2(&a))
+		return (0);
+	if (dq_size(&a) <= 5)
 		sort_small(&a, &b);
 	else
 	{
-		sort(argc, &a, &b);
-		sort2(argc - 1, &a, &b);
+		sort(size, &a, &b);
+		sort2(size, &a, &b);
 	}
-	show(&a);
 	return (0);
 }

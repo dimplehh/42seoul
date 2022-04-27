@@ -1,26 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   deque2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunhlee <hyunhlee@42seoul.student.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/21 16:17:09 by hyunhlee          #+#    #+#             */
-/*   Updated: 2021/05/21 16:18:02 by hyunhlee         ###   ########.fr       */
+/*   Created: 2022/04/27 12:02:55 by hyunhlee          #+#    #+#             */
+/*   Updated: 2022/04/27 12:02:56 by hyunhlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "header.h"
 
-int	ft_lstsize(t_list *lst)
+void	deque_init(t_Deque	*pdeq)
 {
-	int count;
+	pdeq->head = NULL;
+	pdeq->tail = NULL;
+}
 
-	count = 0;
-	while (lst != NULL)
+int	dq_is_empty(t_Deque	*pdeq)
+{
+	if (pdeq->head == NULL)
+		return (1);
+	else
+		return (0);
+}
+
+int	dq_size(t_Deque	*pdeq)
+{
+	int		i;
+	t_Node	*cur;
+
+	i = 0;
+	cur = pdeq->head;
+	if (!dq_is_empty(pdeq))
 	{
-		count++;
-		lst = lst->next;
+		while (cur != pdeq->tail)
+		{
+			cur = cur->next;
+			i++;
+		}
+		return (i + 1);
 	}
-	return (count);
+	return (0);
 }

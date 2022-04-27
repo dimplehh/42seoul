@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	myisspace(const char *str, int i)
+int	my_isspace(const char *str, int i)
 {
 	if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'\
 	|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
@@ -18,16 +18,16 @@ int	myisspace(const char *str, int i)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atol(const char *str)
 {
-	int		i;
-	long	sign;
-	long	result;
+	int			i;
+	long		sign;
+	long long	result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (myisspace(str, i))
+	while (my_isspace(str, i))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
@@ -38,9 +38,9 @@ int	ft_atoi(const char *str)
 	while (str[i] != '\0' && '0' <= str[i] && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
-		if (result > 2147483647 && sign == 1)
+		if (result > 999999999999 && sign == 1)
 			return (-1);
-		if (result > 2147483648 && sign == -1)
+		if (result > 999999999999 && sign == -1)
 			return (0);
 		i++;
 	}
