@@ -22,7 +22,7 @@ OBJS=${SOURCE_FILE:.c=.o}
 
 ${NAME}:${OBJS}
 	make -C libft
-	${CC} ${CCFLAGS} -o ${NAME} -L. libft/libft.a ${OBJS}
+	${CC} ${CCFLAGS} -o ${NAME} -Llibft -lft ${OBJS}
 
 all:${NAME}
 

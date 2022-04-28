@@ -90,15 +90,15 @@ int	main(int argc, char **argv)
 
 	deque_init(&a);
 	deque_init(&b);
-	if (argc == 1 || !check(argc, argv, &a))
+	if (argc == 1)
+		return (0);
+	if (!check(argc, argv, &a))
 	{
 		ft_putendl_fd("ERROR", 2);
 		return (0);
 	}
 	size = dq_size(&a);
-	if (size == 1)
-		return (0);
-	if (check2(&a))
+	if (size == 1 || check2(&a))
 		return (0);
 	if (dq_size(&a) <= 5)
 		sort_small(&a, &b);

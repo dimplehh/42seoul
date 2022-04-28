@@ -14,29 +14,21 @@
 
 int	ft_col(char const *s, char c)
 {
-	unsigned int	i;
-	unsigned int	col;
+	int		count;
+	int		i;
 
 	i = 0;
-	col = 0;
-	if (*s == '\0')
-		return (0);
-	while (s[i] && s[i] == c)
-		i++;
+	count = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
-		{
-			col++;
-			while (s[i] && s[i] == c)
-				i++;
-			continue ;
-		}
-		i++;
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
+			count++;
+		while (s[i] != c && s[i])
+			i++;
 	}
-	if (s[i - 1] != c)
-		col++;
-	return (col);
+	return (count);
 }
 
 int	f_len(char const *s, char c, int i)

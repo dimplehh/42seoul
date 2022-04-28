@@ -62,7 +62,7 @@ int	check2(t_Deque *pdeq)
 {
 	if (is_duple(pdeq))
 	{
-		ft_putendl_fd("ERROR", 2);
+		ft_putendl_fd("ERROR", 1);
 		return (1);
 	}
 	else if (is_sorting(pdeq))

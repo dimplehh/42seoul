@@ -53,7 +53,10 @@ void	dq_add_last(t_Deque	*pdeq, int data)
 	t_Node	*newnode;
 
 	newnode = (t_Node *)malloc(sizeof(t_Node));
+	if (!newnode)
+		exit(1);
 	newnode->data = data;
+	newnode->index = 0;
 	newnode->prev = pdeq->tail;
 	if (dq_is_empty(pdeq))
 		pdeq->head = newnode;
@@ -69,6 +72,8 @@ void	dq_add_first(t_Deque	*pdeq, int index)
 	t_Node	*newnode;
 
 	newnode = (t_Node *)malloc(sizeof(t_Node));
+	if (!newnode)
+		exit(1);
 	newnode->index = index;
 	newnode->next = pdeq->head;
 	if (dq_is_empty(pdeq))

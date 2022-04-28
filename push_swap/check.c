@@ -46,20 +46,18 @@ int	check(int argc, char **argv, t_Deque *a)
 	while (i < argc)
 	{
 		split = ft_split(argv[i], ' ');
-		if (split[0] != NULL)
-		{
-			while (j < ft_col(argv[i++], ' '))
-			{
-				if (!is_number(split[j]) || !is_int(split[j]))
-					return (0);
-				dq_add_last(a, ft_atoi(split[j]));
-				j++;
-			}
-			m_free((const char **)split, j);
-			j = 0;
-		}
-		else
+		if (!split[0])
 			return (0);
+		while (j < ft_col(argv[i], ' '))
+		{
+			if (!is_number(split[j]) || !is_int(split[j]))
+				return (0);
+			dq_add_last(a, ft_atoi(split[j]));
+			j++;
+		}
+		m_free((const char **)split, j);
+		j = 0;
+		i++;
 	}
 	return (1);
 }
