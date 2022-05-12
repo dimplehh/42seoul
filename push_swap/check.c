@@ -35,7 +35,7 @@ int	is_int(char	*argv)
 	return (1);
 }
 
-int	check(int argc, char **argv, t_Deque *a)
+int	check(int argc, char **argv, t_deque *a)
 {
 	int		i;
 	int		j;

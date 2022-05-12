@@ -12,10 +12,10 @@
 
 #include "header.h"
 
-int	is_duple(t_Deque *pdeq)
+int	is_duple(t_deque *pdeq)
 {
-	t_Node	*cur;
-	t_Node	*newhead;
+	t_node	*cur;
+	t_node	*newhead;
 
 	newhead = pdeq->head;
 	if (newhead->next)
@@ -35,10 +35,10 @@ int	is_duple(t_Deque *pdeq)
 	return (0);
 }
 
-int	is_sorting(t_Deque *pdeq)
+int	is_sorting(t_deque *pdeq)
 {
-	t_Node	*cur;
-	t_Node	*newhead;
+	t_node	*cur;
+	t_node	*newhead;
 
 	newhead = pdeq->head;
 	if (newhead->next)
@@ -58,11 +58,11 @@ int	is_sorting(t_Deque *pdeq)
 	return (1);
 }
 
-int	check2(t_Deque *pdeq)
+int	check2(t_deque *pdeq)
 {
 	if (is_duple(pdeq))
 	{
-		ft_putendl_fd("ERROR", 1);
+		ft_putendl_fd("Error", 1);
 		return (1);
 	}
 	else if (is_sorting(pdeq))

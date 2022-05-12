@@ -12,9 +12,9 @@
 
 #include "header.h"
 
-void	dq_indexing(t_Deque	*pdeq)
+void	dq_indexing(t_deque	*pdeq)
 {
-	t_Node	*cur;
+	t_node	*cur;
 
 	cur = pdeq->head;
 	if (dq_is_empty(pdeq))
@@ -32,11 +32,13 @@ void	dq_indexing(t_Deque	*pdeq)
 	}
 }
 
-int	dq_remove_first(t_Deque	*pdeq)
+int	dq_remove_first(t_deque	*pdeq)
 {
-	t_Node	*newnode;
+	t_node	*newnode;
 	int		index;
 
+	if (pdeq->head == NULL)
+		return (0);
 	newnode = pdeq->head;
 	index = pdeq->head->index;
 	pdeq->head = pdeq->head->next;
@@ -48,11 +50,11 @@ int	dq_remove_first(t_Deque	*pdeq)
 	return (index);
 }
 
-void	dq_add_last(t_Deque	*pdeq, int data)
+void	dq_add_last(t_deque	*pdeq, int data)
 {
-	t_Node	*newnode;
+	t_node	*newnode;
 
-	newnode = (t_Node *)malloc(sizeof(t_Node));
+	newnode = (t_node *)malloc(sizeof(t_node));
 	if (!newnode)
 		exit(1);
 	newnode->data = data;
@@ -67,11 +69,11 @@ void	dq_add_last(t_Deque	*pdeq, int data)
 	dq_indexing(pdeq);
 }
 
-void	dq_add_first(t_Deque	*pdeq, int index)
+void	dq_add_first(t_deque	*pdeq, int index)
 {
-	t_Node	*newnode;
+	t_node	*newnode;
 
-	newnode = (t_Node *)malloc(sizeof(t_Node));
+	newnode = (t_node *)malloc(sizeof(t_node));
 	if (!newnode)
 		exit(1);
 	newnode->index = index;

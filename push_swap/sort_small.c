@@ -12,10 +12,10 @@
 
 #include "header.h"
 
-int	is_sort(t_Deque *pdeq)
+int	is_sort(t_deque *pdeq)
 {
 	int		i;
-	t_Node	*cur;
+	t_node	*cur;
 
 	i = 0;
 	cur = pdeq->head;
@@ -29,7 +29,7 @@ int	is_sort(t_Deque *pdeq)
 	return (1);
 }
 
-void	sort_three(t_Deque *a)
+void	sort_three(t_deque *a)
 {
 	if (a->head->index < a->tail->index && \
 	a->head->next->index > a->tail->index)
@@ -54,10 +54,10 @@ void	sort_three(t_Deque *a)
 		ra(a);
 }
 
-void	sort_idx(t_Deque *a, int idx)
+void	sort_idx(t_deque *a, int idx)
 {
 	int		i;
-	t_Node	*cur;
+	t_node	*cur;
 
 	i = 0;
 	cur = a->head;
@@ -78,7 +78,7 @@ void	sort_idx(t_Deque *a, int idx)
 	}
 }
 
-void	sort_five(t_Deque *a, t_Deque *b)
+void	sort_five(t_deque *a, t_deque *b)
 {
 	sort_idx(a, 0);
 	pb(a, b);
@@ -90,7 +90,7 @@ void	sort_five(t_Deque *a, t_Deque *b)
 	pa(a, b);
 }
 
-void	sort_small(t_Deque *pdeqa, t_Deque *pdeqb)
+void	sort_small(t_deque *pdeqa, t_deque *pdeqb)
 {
 	if (dq_size(pdeqa) == 2)
 		if (pdeqa->head->index > pdeqa->head->next->index)

@@ -12,7 +12,7 @@
 
 #include "header.h"
 
-void	sa(t_Deque *pdeq)
+void	sa(t_deque *pdeq)
 {
 	int	temp;
 	int	tempd;
@@ -29,7 +29,7 @@ void	sa(t_Deque *pdeq)
 	}
 }
 
-void	sb(t_Deque *pdeq)
+void	sb(t_deque *pdeq)
 {
 	int	temp;
 	int	tempd;
@@ -46,10 +46,10 @@ void	sb(t_Deque *pdeq)
 	}
 }
 
-void	pa(t_Deque *pdeqa, t_Deque *pdeqb)
+void	pa(t_deque *pdeqa, t_deque *pdeqb)
 {
 	int		temp_idx;
-	t_Node	*newhead;
+	t_node	*newhead;
 
 	if (!pdeqb->head)
 		return ;
@@ -59,10 +59,10 @@ void	pa(t_Deque *pdeqa, t_Deque *pdeqb)
 	ft_putendl_fd("pa", 1);
 }
 
-void	pb(t_Deque *pdeqa, t_Deque *pdeqb)
+void	pb(t_deque *pdeqa, t_deque *pdeqb)
 {
 	int		temp_idx;
-	t_Node	*newhead;
+	t_node	*newhead;
 
 	if (!pdeqa->head)
 		return ;

@@ -12,9 +12,9 @@
 
 #include "header.h"
 
-void	ra(t_Deque *pdeqa)
+void	ra(t_deque *pdeqa)
 {
-	t_Node	*temp;
+	t_node	*temp;
 
 	if (pdeqa->head && pdeqa->head->next)
 	{
@@ -28,9 +28,9 @@ void	ra(t_Deque *pdeqa)
 	ft_putendl_fd("ra", 1);
 }
 
-void	rb(t_Deque *pdeqb)
+void	rb(t_deque *pdeqb)
 {
-	t_Node	*temp;
+	t_node	*temp;
 
 	if (pdeqb->head && pdeqb->head->next)
 	{
@@ -44,9 +44,9 @@ void	rb(t_Deque *pdeqb)
 	ft_putendl_fd("rb", 1);
 }
 
-void	rra(t_Deque *pdeqa)
+void	rra(t_deque *pdeqa)
 {
-	t_Node	*temp;
+	t_node	*temp;
 
 	temp = pdeqa->tail;
 	if (pdeqa->head && pdeqa->head->next)
@@ -61,9 +61,9 @@ void	rra(t_Deque *pdeqa)
 	ft_putendl_fd("rra", 1);
 }
 
-void	rrb(t_Deque *pdeqb)
+void	rrb(t_deque *pdeqb)
 {
-	t_Node	*temp;
+	t_node	*temp;
 
 	temp = pdeqb->tail;
 	if (pdeqb->head && pdeqb->head->next)

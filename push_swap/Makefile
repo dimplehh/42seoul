@@ -11,10 +11,10 @@
 # **************************************************************************** #
 
 CC=gcc
-CCFLAGS=-Wall -Wextra -Werror
+CCFLAGS=-Wall -Wextra -Werror -g
 NAME=push_swap
 SOURCE_FILE=push_swap.c operator.c operator2.c\
-deque.c deque2.c check.c check2.c sortSmall.c
+deque.c deque2.c check.c check2.c sort_small.c
 OBJS=${SOURCE_FILE:.c=.o}
 
 .c.o:

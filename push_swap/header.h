@@ -16,19 +16,19 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct Node
+typedef struct node
 {
-	struct Node	*prev;
+	struct node	*prev;
 	int			data;
 	int			index;
-	struct Node	*next;
-}t_Node;
+	struct node	*next;
+}t_node;
 
-typedef struct Deque
+typedef struct deque
 {
-	t_Node	*head;
-	t_Node	*tail;
-}t_Deque;
+	t_node	*head;
+	t_node	*tail;
+}t_deque;
 
 char		**m_free(char const **dst, int j);
 int			ft_atoi(const char *str);
@@ -39,26 +39,26 @@ char		*ft_strchr(const char *s, int c);
 void		ft_putendl_fd(char *s, int fd);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
-int			check2(t_Deque *pdeq);
-void		sa(t_Deque *pdeq);
-void		sb(t_Deque *pdeq);
-void		ss(t_Deque *pdeqa, t_Deque *pdeqb);
-void		pa(t_Deque *pdeqa, t_Deque *pdeqb);
-void		pb(t_Deque *pdeqa, t_Deque *pdeqb);
-void		ra(t_Deque *pdeqa);
-void		rb(t_Deque *pdeqb);
-void		rr(t_Deque *pdeqa, t_Deque *pdeqb);
-void		rra(t_Deque *pdeqa);
-void		rrb(t_Deque *pdeqb);
-void		rrr(t_Deque *pdeqa, t_Deque *pdeqb);
-void		show(t_Deque *pdeq);
-int			dq_size(t_Deque *pdeq);
-int			dq_remove_first(t_Deque *pdeq);
-void		dq_add_last(t_Deque *pdeq, int data);
-void		dq_add_first(t_Deque *pdeq, int index);
-int			dq_is_empty(t_Deque *pdeq);
-void		deque_init(t_Deque *pdeq);
-void		sort_small(t_Deque *pdeqa, t_Deque *pdeqb);
-int			check(int argc, char **argv, t_Deque *a);
+int			check2(t_deque *pdeq);
+void		sa(t_deque *pdeq);
+void		sb(t_deque *pdeq);
+void		ss(t_deque *pdeqa, t_deque *pdeqb);
+void		pa(t_deque *pdeqa, t_deque *pdeqb);
+void		pb(t_deque *pdeqa, t_deque *pdeqb);
+void		ra(t_deque *pdeqa);
+void		rb(t_deque *pdeqb);
+void		rr(t_deque *pdeqa, t_deque *pdeqb);
+void		rra(t_deque *pdeqa);
+void		rrb(t_deque *pdeqb);
+void		rrr(t_deque *pdeqa, t_deque *pdeqb);
+void		show(t_deque *pdeq);
+int			dq_size(t_deque *pdeq);
+int			dq_remove_first(t_deque *pdeq);
+void		dq_add_last(t_deque *pdeq, int data);
+void		dq_add_first(t_deque *pdeq, int index);
+int			dq_is_empty(t_deque *pdeq);
+void		deque_init(t_deque *pdeq);
+void		sort_small(t_deque *pdeqa, t_deque *pdeqb);
+int			check(int argc, char **argv, t_deque *a);
 
 #endif

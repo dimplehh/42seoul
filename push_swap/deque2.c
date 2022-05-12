@@ -12,13 +12,13 @@
 
 #include "header.h"
 
-void	deque_init(t_Deque	*pdeq)
+void	deque_init(t_deque	*pdeq)
 {
 	pdeq->head = NULL;
 	pdeq->tail = NULL;
 }
 
-int	dq_is_empty(t_Deque	*pdeq)
+int	dq_is_empty(t_deque	*pdeq)
 {
 	if (pdeq->head == NULL)
 		return (1);
@@ -26,10 +26,10 @@ int	dq_is_empty(t_Deque	*pdeq)
 		return (0);
 }
 
-int	dq_size(t_Deque	*pdeq)
+int	dq_size(t_deque	*pdeq)
 {
 	int		i;
-	t_Node	*cur;
+	t_node	*cur;
 
 	i = 0;
 	cur = pdeq->head;
